@@ -1,0 +1,41 @@
+Use go with version 1.11.x as the Travis-CI worker language:
+
+language: go
+
+go:
+
+- 1.11.x
+
+Install Hugo (https://GitHub.com/gohugoio/hugo) using the "go get GitHub.com/gohugoio/hugo" command:
+
+install:
+
+- go get GitHub.com/gohugoio/hugo
+
+Install the beautifulhugo theme by creating a themes/beautifulhugo folder and cloning it from the GitHub repository: https://GitHub.com/halogenica/beautifulhugo.git
+
+Generate blog content with the hugo --theme beautifulhugo command:
+
+script:
+
+- mkdir -p themes/beautifulhugo && git clone https://GitHub.com/halogenica/beautifulhugo.git themes/beautifulhugo
+
+- hugo --theme beautifulhugo
+
+Use the deploy block of Travis-CI with the provider pages and the GITHUB_TOKEN environment variable defined in the exercises.
+
+The deployment should be configured to run only the master branch, as follows:
+
+deploy:
+
+provider: pages
+
+skip_cleanup: true
+
+GitHub_token: $GITHUB_TOKEN
+
+local_dir: public
+
+on:
+
+branch: master
